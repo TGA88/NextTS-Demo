@@ -97,6 +97,8 @@ export default function Upload() {
                 <span>{size}</span>
               </section>
 
+             
+
               {/* <button type='submit'>
               </button> */}
               <Button type='button' variant="contained" color='error' onClick={remove}>

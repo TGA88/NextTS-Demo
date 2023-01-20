@@ -3,6 +3,7 @@ import AzureADProvider from "next-auth/providers/azure-ad";
 import type { NextAuthOptions } from "next-auth";
 import axios from "axios";
 import type { NextApiRequest, NextApiResponse } from "next";
+import LineProvider from "next-auth/providers/line";
 
 async function refreshAccessToken(token :any) {
   try {
@@ -103,6 +104,10 @@ export const authOptions = {
         params: { scope: process.env.AZURE_AD_SCOPE },
       },
     }),
+    LineProvider({
+      clientId: process.env.LINE_CLIENT_ID as string,
+      clientSecret: process.env.LINE_CLIENT_SECRET as string
+    })
   ],
 
   callbacks: {
@@ -177,7 +182,7 @@ export const authOptions = {
     updateAge: 8 * 60 * 60, // 8 hours
   },
   pages: {
-    signIn: "/signin",
+    // signIn: "/signin",
   },
   // debug: true,
 };
