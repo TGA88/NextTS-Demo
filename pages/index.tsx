@@ -10,7 +10,7 @@ import Componets from '../components/login-btn'
 import Signin from '../pages/signin'
 import { useEffect, useState } from 'react'
 import Header from '../layout/Header/Header'
-import Dashboard from './dashboard/dashboard'
+import Dashboard from './dashboard/dashboardbackup'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import router from 'next/router'
@@ -52,8 +52,11 @@ export default function Home() {
         {/* <h1 className="text-3xl font-bold underline">
              Hello world! Tailwind
         </h1> */}
-
-       <Button onClick={() => (setNumb(prev => prev+1))}  variant="contained">{numb}</Button>
+        <br/>
+  <Link href={'/dashboard/dashboard'}>
+    <Button variant="contained">go to dashboard</Button>
+    </Link>
+       {/* <Button onClick={() => (setNumb(prev => prev+1))}  variant="contained">{numb}</Button>
 
         <h1>the value of counter is {count}</h1>
       <Stack spacing={2} direction="row"> 
@@ -61,7 +64,7 @@ export default function Home() {
       <Button color="error" onClick={() => dispatch(decrement())} variant="contained">-</Button>
       <Button onClick={() => dispatch(incrementByAmount(2))} variant="contained">+2</Button>
 
-    </Stack><br/>
+    </Stack><br/> */}
     <Componets/>
 
       </main>

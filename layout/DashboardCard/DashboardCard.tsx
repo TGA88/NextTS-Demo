@@ -17,7 +17,7 @@ const DashboardCard = (props: DashboardCard) => {
           <Typography variant="h4" color="textPrimary">
             {props.title}
           </Typography>
-          <Typography variant="h5" color="textSecondary">
+          <Typography variant="h4" color="textSecondary">
             {props.subtitle}
           </Typography>
         </Grid>

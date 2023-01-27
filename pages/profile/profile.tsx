@@ -13,6 +13,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Profile } from "../../model/profile";
 import { useSession, signIn, signOut } from "next-auth/react";
+import Link from "next/link";
 
 type Props = {};
 
@@ -241,6 +242,15 @@ export default function profile({}: Props) {
                   >
                     submit
                   </Button>
+                  <Link href="/dashboard/dashboard" passHref>
+                  <Button
+                    variant="contained"
+                    color="error"
+                    sx={{ marginLeft: 1 }}
+                  >
+                    BACK
+                  </Button>
+                  </Link>
                 </Box>
               </CardContent>
             </Grid>
