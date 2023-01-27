@@ -24,6 +24,7 @@ async function refreshAccessToken(token :any) {
       }),
     });
 
+
     const refreshedTokens = await response.json();
     if (!response.ok) {
       throw refreshedTokens;
@@ -38,7 +39,7 @@ async function refreshAccessToken(token :any) {
   } catch (error) {
     return {
       ...token,
-      error: "RefreshAccessTokenError",
+      error: token.user.provider === 'azure-ad' ? "RefreshAccessTokenError":null
     };
   }
 }
@@ -106,18 +107,28 @@ export const authOptions = {
     }),
     LineProvider({
       clientId: process.env.LINE_CLIENT_ID as string,
-      clientSecret: process.env.LINE_CLIENT_SECRET as string
+      clientSecret: process.env.LINE_CLIENT_SECRET as string,
+      profile(profile) {
+        console.log('profile',profile)
+        return {
+          id: profile.sub,
+          ...profile,
+        };
+      },
     })
   ],
 
   callbacks: {
     async jwt({ token, user, account }:any) {
+      // console.log('user',user)
       // Persist the OAuth access_token to the token right after signin
 
       if (account && user) {
         let accessTokenExpires =
           Date.now() + parseInt(account.ext_expires_in) * 1000;
-          // console.log(account)
+          // token line
+          user.idToken = account.id_token
+          user.provider = account.provider
         return {
           // idToken:account.id_token,
           // token ที่ได้

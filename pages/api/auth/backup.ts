@@ -1,6 +1,8 @@
 import NextAuth from "next-auth";
 import AzureADProvider from "next-auth/providers/azure-ad";
 import AzureADB2CProvider from "next-auth/providers/azure-ad-b2c";
+// import LineProvider from "next-auth/providers/line";
+
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
 export default NextAuth({
@@ -11,6 +13,10 @@ export default NextAuth({
     clientSecret: process.env.AZURE_AD_CLIENT_SECRET as string,
     tenantId: process.env.AZURE_AD_TENANT_ID,
     }),
+    // LineProvider({
+    //   clientId: process.env.LINE_CLIENT_ID as string,
+    //   clientSecret: process.env.LINE_CLIENT_SECRET as string
+    // })
     // --------------------------------------------------------------------
     // AzureADB2CProvider({
     //   tenantId: process.env.AZURE_AD_B2C_TENANT_NAME,
@@ -22,14 +28,14 @@ export default NextAuth({
     //       scope: `https://${process.env.AZURE_AD_B2C_TENANT_NAME}.onmicrosoft.com/api/demo.read https://${process.env.AZURE_AD_B2C_TENANT_NAME}.onmicrosoft.com/api/demo.write offline_access openid profile`,
     //     },
     //   },
-    //   profile(profile) {
-    //     // console.log('profile',profile)
-    //     return {
-    //       id: profile.sub,
-    //       name: profile.given_name,
-    //       ...profile,
-    //     };
-    //   },
+      // profile(profile) {
+      //   // console.log('profile',profile)
+      //   return {
+      //     id: profile.sub,
+      //     name: profile.given_name,
+      //     ...profile,
+      //   };
+      // },
     // }),
   ],
 
