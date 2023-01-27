@@ -22,7 +22,7 @@ interface DataType {
 }
 
 const columns: ColumnsType<DataType> = [
-  { title: 'Name', dataIndex: 'name', key: 'name' ,
+  { title: 'All (last 30 day) ', dataIndex: 'name', key: 'name' ,
   filters: [
     { text: 'ชำระ', value: 'name' },
     { text: 'รอตรวจสอบ', value: 'wait' },
