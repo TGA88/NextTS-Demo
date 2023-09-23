@@ -1,7 +1,7 @@
 import { getProviders, getSession, signIn, useSession } from "next-auth/react";
 import { GetServerSideProps } from "next";
 import Image from "next/image";
-import { VscAzure , VscAccount} from "react-icons/vsc";
+import { VscAzure, VscAccount } from "react-icons/vsc";
 import { Box, Button, Divider, Grid, Typography } from "@mui/material";
 import pkg from "../package.json";
 import { useEffect, useState } from "react";
@@ -20,10 +20,10 @@ const SignIn = ({ providers }: SignInProps) => {
   // useEffect(() => {
   //   if(status  === "unauthenticated" )
   // console.log(providers)
-  //   Object.values(providers).map((provider) =>( 
+  //   Object.values(providers).map((provider) =>(
   //     signIn(provider.id)
   //     ))
-      
+
   // },[]);
 
   return (
@@ -60,8 +60,7 @@ const SignIn = ({ providers }: SignInProps) => {
               alt="logo"
             /> */}
 
-           <VscAccount size={40}/>
-
+            <VscAccount size={40} />
 
             <Typography
               variant="h4"
@@ -138,12 +137,12 @@ export default SignIn;
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { req } = context;
   const session = await getSession({ req });
-  const providers = await getProviders()
+  const providers = await getProviders();
   // console.log('session' , session)
   if (session) {
     return {
       redirect: {
-        destination: "/",
+        destination: "http://localhost:3000",
         permanent: false,
       },
     };
