@@ -9,9 +9,9 @@ export default NextAuth({
   // https://next-auth.js.org/configuration/providers
   providers: [
     AzureADProvider({
-    clientId: process.env.AZURE_AD_CLIENT_ID as string,
-    clientSecret: process.env.AZURE_AD_CLIENT_SECRET as string,
-    tenantId: process.env.AZURE_AD_TENANT_ID,
+      clientId: process.env.AZURE_AD_CLIENT_ID as string,
+      clientSecret: process.env.AZURE_AD_CLIENT_SECRET as string,
+      tenantId: process.env.AZURE_AD_TENANT_ID,
     }),
     // LineProvider({
     //   clientId: process.env.LINE_CLIENT_ID as string,
@@ -28,33 +28,33 @@ export default NextAuth({
     //       scope: `https://${process.env.AZURE_AD_B2C_TENANT_NAME}.onmicrosoft.com/api/demo.read https://${process.env.AZURE_AD_B2C_TENANT_NAME}.onmicrosoft.com/api/demo.write offline_access openid profile`,
     //     },
     //   },
-      // profile(profile) {
-      //   // console.log('profile',profile)
-      //   return {
-      //     id: profile.sub,
-      //     name: profile.given_name,
-      //     ...profile,
-      //   };
-      // },
+    // profile(profile) {
+    //   // console.log('profile',profile)
+    //   return {
+    //     id: profile.sub,
+    //     name: profile.given_name,
+    //     ...profile,
+    //   };
+    // },
     // }),
   ],
 
   callbacks: {
-    async jwt({ token, account ,profile }) {
+    async jwt({ token, account, profile }) {
       // console.log('token', token)
 
-    // Persist the OAuth access_token to the token right after signin
-    if (account) {
-    token.accessToken = account.access_token
-    }
-    return token
+      // Persist the OAuth access_token to the token right after signin
+      if (account) {
+        token.accessToken = account.access_token;
+      }
+      return token;
     },
-    async session({ session, token, user }:any) {
+    async session({ session, token, user }: any) {
       // console.log('token', token)
-    // Send properties to the client, like an access_token from a provider.
-    session.accessToken = token.accessToken
-    return session
-    }
+      // Send properties to the client, like an access_token from a provider.
+      session.accessToken = token.accessToken;
+      return session;
+    },
   },
   // Database optional. MySQL, Maria DB, Postgres and MongoDB are supported.
   // https://next-auth.js.org/configuration/databases
@@ -104,8 +104,8 @@ export default NextAuth({
   // pages is not specified for that route.
   // https://next-auth.js.org/configuration/pages
   pages: {
-    signIn: '/signin', // Displays signin buttons
-    signOut: '/signout', // Displays form with sign out button
+    signIn: "/signin", // Displays signin buttons
+    signOut: "/signout", // Displays form with sign out button
     // error: '/auth/error', // Error code passed in query string as ?error=
     // verifyRequest: '/auth/verify-request', // Used for check email page
     // newUser: null// If set, new users will be directed here on first sign in

@@ -5,7 +5,7 @@ import axios from "axios";
 import type { NextApiRequest, NextApiResponse } from "next";
 import LineProvider from "next-auth/providers/line";
 
-async function refreshAccessToken(token :any) {
+async function refreshAccessToken(token: any) {
   try {
     // console.log(`Call refreshAccessToken : ${new Date()}`);
     const url = `https://login.microsoftonline.com/${process.env.AZURE_AD_TENANT_ID}/oauth2/v2.0/token`;
@@ -24,7 +24,6 @@ async function refreshAccessToken(token :any) {
       }),
     });
 
-
     const refreshedTokens = await response.json();
     if (!response.ok) {
       throw refreshedTokens;
@@ -39,7 +38,8 @@ async function refreshAccessToken(token :any) {
   } catch (error) {
     return {
       ...token,
-      error: token.user.provider === 'azure-ad' ? "RefreshAccessTokenError":null
+      error:
+        token.user.provider === "azure-ad" ? "RefreshAccessTokenError" : null,
     };
   }
 }
@@ -105,30 +105,37 @@ export const authOptions = {
         params: { scope: process.env.AZURE_AD_SCOPE },
       },
     }),
-    LineProvider({
-      clientId: process.env.LINE_CLIENT_ID as string,
-      clientSecret: process.env.LINE_CLIENT_SECRET as string,
-      profile(profile) {
-        console.log('profile',profile)
-        return {
-          id: profile.sub,
-          ...profile,
-        };
-      },
-    })
+    // LineProvider({
+    //   clientId: process.env.LINE_CLIENT_ID as string,
+    //   clientSecret: process.env.LINE_CLIENT_SECRET as string,
+    //   authorization: { params: { scope: "openid profile email" } },
+    //   // profile(profile) {
+    //   //   return {
+    //   //     id: profile.sub,
+    //   //     email: profile.email,
+    //   //     ...profile,
+    //   //   };
+    //   // },
+    // }),
   ],
 
   callbacks: {
-    async jwt({ token, user, account }:any) {
-      // console.log('user',user)
+    // async redirect({ url, baseUrl }: any) {
+    //   console.log("url", url);
+    //   console.log("baseUrl", baseUrl);
+    //   return url;
+    //   // return url.startsWith(baseUrl) ? url : baseUrl;
+    // },
+    async jwt({ token, user, account }: any) {
       // Persist the OAuth access_token to the token right after signin
+      console.log("token A", token);
 
       if (account && user) {
         let accessTokenExpires =
           Date.now() + parseInt(account.ext_expires_in) * 1000;
-          // token line
-          user.idToken = account.id_token
-          user.provider = account.provider
+        // token line
+        user.idToken = account.id_token;
+        user.provider = account.provider;
         return {
           // idToken:account.id_token,
           // token ที่ได้
@@ -160,9 +167,9 @@ export const authOptions = {
           //   token.user.name,
           //   token.userid.toString()
           // );
-        //   const getRole = await getRoleUser(newToken.accessToken);
+          //   const getRole = await getRoleUser(newToken.accessToken);
           newToken.userRole = ["ADMIN"];
-        //   newToken.userRole = getRole;
+          //   newToken.userRole = getRole;
           return { ...newToken };
         }
         return token;
@@ -171,7 +178,7 @@ export const authOptions = {
         return { ...newToken };
       }
     },
-    async session({ session, token }:any) {
+    async session({ session, token }: any) {
       // console.log("fist_access: " + token.accessToken);
       session.user = token.user;
       session.userid = token.userid;
@@ -193,9 +200,10 @@ export const authOptions = {
     updateAge: 8 * 60 * 60, // 8 hours
   },
   pages: {
-    // signIn: "/signin",
+    signIn: "/signin",
+    // signIn: "http://localhost:3000",
   },
-  // debug: true,
+  debug: true,
 };
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (req: NextApiRequest, res: NextApiResponse) =>

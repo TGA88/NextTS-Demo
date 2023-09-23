@@ -1,7 +1,8 @@
-import { Box, Card, CardActionArea, CardContent, Container, Typography } from "@mui/material";
+import { Box, Button, Card, CardActionArea, CardContent, Container, Typography } from "@mui/material";
 import React from "react";
 import CurrencyBitcoinIcon from '@mui/icons-material/CurrencyBitcoin';
 import Link from "next/link";
+import { useSession, signIn, signOut } from "next-auth/react"
 type Props = {};
 
 export default function dashboard({}: Props) {
@@ -144,6 +145,9 @@ export default function dashboard({}: Props) {
               </Typography> */}
           </Card>
           </CardActionArea>
+          <Button variant="contained" color="error" onClick={() => signOut({callbackUrl: '/'})}>Sign out</Button>
+
+          {/* <Button variant="contained" color="error" onClick={() => signOut()}>Sign out</Button> */}
 
         </Box>
       </Box>
