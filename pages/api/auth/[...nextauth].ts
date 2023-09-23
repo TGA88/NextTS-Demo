@@ -128,6 +128,7 @@ export const authOptions = {
     // },
     async jwt({ token, user, account }: any) {
       // Persist the OAuth access_token to the token right after signin
+      console.log("token A", token);
 
       if (account && user) {
         let accessTokenExpires =

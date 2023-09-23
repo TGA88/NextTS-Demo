@@ -135,6 +135,7 @@ SignIn.nonLayout = true;
 export default SignIn;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  console.log("context", context);
   const { req } = context;
   const session = await getSession({ req });
   const providers = await getProviders();
@@ -142,7 +143,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (session) {
     return {
       redirect: {
-        destination: "http://localhost:3000",
+        destination: "/",
         permanent: false,
       },
     };
