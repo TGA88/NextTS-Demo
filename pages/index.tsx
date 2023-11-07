@@ -83,7 +83,7 @@ export default function Home() {
         <br />
 
         {session && (
-          <Link href={"/dashboard/dashboard"}>
+          <Link href={"http://localhost:3000"}>
             <Button variant="contained">go to dashboard</Button>
           </Link>
         )}

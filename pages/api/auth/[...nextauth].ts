@@ -105,18 +105,18 @@ export const authOptions = {
         params: { scope: process.env.AZURE_AD_SCOPE },
       },
     }),
-    // LineProvider({
-    //   clientId: process.env.LINE_CLIENT_ID as string,
-    //   clientSecret: process.env.LINE_CLIENT_SECRET as string,
-    //   authorization: { params: { scope: "openid profile email" } },
-    //   // profile(profile) {
-    //   //   return {
-    //   //     id: profile.sub,
-    //   //     email: profile.email,
-    //   //     ...profile,
-    //   //   };
-    //   // },
-    // }),
+    LineProvider({
+      clientId: process.env.LINE_CLIENT_ID as string,
+      clientSecret: process.env.LINE_CLIENT_SECRET as string,
+      authorization: { params: { scope: "openid profile email" } },
+      // profile(profile) {
+      //   return {
+      //     id: profile.sub,
+      //     email: profile.email,
+      //     ...profile,
+      //   };
+      // },
+    }),
   ],
 
   callbacks: {
